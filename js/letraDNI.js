@@ -10,11 +10,11 @@ LETRA     T     R     W     A     G     M     Y     F     P     D     X      B  
 */
 
 //VARIABLES
-var dni, letra0;
+var dni, letra0;                        
 
 //FUNCIONS
 function calcularLetraDNI(numeroDNI) {
-    if(numeroDNI == 'error'){
+    if(numeroDNI == 'error'){             //en caso la letra no cumple condicion de ser Z, Y o X
         return ' - entregaste la letra falsa.'
     }else{
     var resto = numeroDNI % 23          //Se divide el numero entre 23
@@ -24,30 +24,32 @@ function calcularLetraDNI(numeroDNI) {
     }
 }
 
-function calcular() {
+//MAIN FUNCTION 
+function calcular() {   
     dni = document.getElementById('inputValue').value;
     console.log(isNaN(dni.charAt(0)));        //comprobamos si la primera letra es otro que numero
     
-    if (!isNaN(dni.charAt(0))) {
-        console.log("Espanol")
+    if (!isNaN(dni.charAt(0))) {              //Si no tiene la letra como primer caracter = Espanol
+        // console.log("Espanol")
         document.getElementById('result').innerHTML = calcularLetraDNI(dni);
-    } else {
-        console.log("Extranjero")
+    } else {                                     //Si tiene la letra como primer caracter = extranjero
+        // console.log("Extranjero")              
         document.getElementById('result').innerHTML = dni.charAt(0) + calcularLetraDNI(comprobarNIE(dni));
     }
 }
 
+//FUNCION PARA COMPOBAR SI LA LETRA DE EXTRANJEROS ES VALIDA
 function comprobarNIE(dni) {
     //Los NIE's de extranjeros residentes en España tienen una letra (X, Y, Z), 7 números y dígito de control.
     //X=0, Y=1, Z=2
     letra0 = dni.charAt(0).toUpperCase();               //si es primera letra algo de siguientes, es extranjero                           
     if (letra0 == 'X') {
-        return dni = parseInt(0 + dni.substring(1));
+        return dni = parseInt(0 + dni.substring(1));     //parseamos dni y anadimos numero corespondiente en la primera posicion
     } else if (letra0 == 'Y') {
         return dni = parseInt(1 + dni.substring(1));
     } else if (letra0 == 'Z') {
         return dni = parseInt(2 + dni.substring(1));
-    }else if(letra0 != 'Z'||'Y'||'X'){
+    }else if(letra0 != 'Z'||'Y'||'X'){                  //Si la primera letra no es valida, return error
         console.log("numero Extranjero no valido " + dni);
         return dni = 'error';                           //la letra no es valida
     }else{
@@ -55,13 +57,3 @@ function comprobarNIE(dni) {
     }
     
 }
-
-
-
-
-// var newDiv = document.createElement('div');                                  //creamos nodos/elementos
-// newDiv.innerHTML = iteracion[i] + " fue " + this.coches[i]                  //por cada posicion en array 'coches' se escribe al elemento 
-
-// newDiv.setAttribute('class', 'caja naranja');                               //agregar atributos a los caja
-// var contenedor = document.getElementById('containerMain');                 //Agregar el elemento al documento
-// contenedor.appendChild(newDiv);                                            //pegamos div nuevo al contenedor ya creado en documento
