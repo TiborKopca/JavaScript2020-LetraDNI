@@ -27,14 +27,15 @@ function calcularLetraDNI(numeroDNI) {
 //MAIN FUNCTION 
 function calcular() {   
     dni = document.getElementById('inputValue').value;
-    console.log(isNaN(dni.charAt(0)));        //comprobamos si la primera letra es otro que numero
-    
-    if (!isNaN(dni.charAt(0))) {              //Si no tiene la letra como primer caracter = Espanol
+    // console.log(isNaN(dni.charAt(0)));        
+        if (!isNaN(dni.charAt(0))) {              //comprobamos si la primera letra es otro que numero,Si no tiene la letra como primer caracter = Espanol
         // console.log("Espanol")
         document.getElementById('result').innerHTML = calcularLetraDNI(dni);
     } else {                                     //Si tiene la letra como primer caracter = extranjero
         // console.log("Extranjero")              
-        document.getElementById('result').innerHTML = dni.charAt(0) + calcularLetraDNI(comprobarNIE(dni));
+        var dniNumero = calcularLetraDNI(comprobarNIE(dni)).slice(1);       //quitamos el primer numero 
+        var dniLetra = dni.charAt(0)
+        document.getElementById('result').innerHTML = dniLetra + dniNumero;
     }
 }
 
